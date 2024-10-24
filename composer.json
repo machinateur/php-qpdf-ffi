@@ -7,6 +7,21 @@
     "qpdf",
     "php-ffi"
   ],
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "files": [
+      "lib_qpdf.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "machinateur",
+      "email": "hello@machinateur.dev",
+      "homepage": "https://machinateur.dev"
+    }
+  ],
+  "minimum-stability": "stable",
   "require": {
     "php": ">=7.4",
     "ext-ffi": "*",
