@@ -1,0 +1,15 @@
+{
+  "name": "machinateur/php-qpdf-ffi",
+  "description": "A really simple PHP integration for qpdf leveraging its JSON job file functionality with PHP-FFI to C.",
+  "keywords": [
+    "transform",
+    "pdf",
+    "qpdf",
+    "php-ffi"
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-ffi": "*",
+    "ext-json": "*"
+  }
+}
