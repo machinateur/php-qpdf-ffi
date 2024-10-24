@@ -39,7 +39,7 @@ Since qpdf is a separate C library, the binaries are not included here (yet).
 Use the full set of features provided by qpdf JSON job files directly from within PHP,
  without the need to write any C glue code for a custom PHP extension.
 
-No need `\exec()` shenanigans. The PHP-FFI layer handles the direct interaction.
+No need for `\exec()` shenanigans. The PHP-FFI layer handles the direct interaction.
  This library only integrates one single function, therefor very little can break.
 
 The JSON format can be dynamically generated based on the requirements of your application.
