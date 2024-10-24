@@ -8,3 +8,4 @@ thumbs.db
 # Library
 
 vendor/
+composer.lock
