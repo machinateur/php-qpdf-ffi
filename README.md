@@ -50,6 +50,8 @@ The JSON format can be dynamically generated based on the requirements of your a
 ## Usage
 
 ```php
+<?php
+
 \define('LIB_QPDF_PATH', '/path/to/your/qpdf');
 
 require_once __DIR__ . '/vendor/autoload.php';

@@ -1,0 +1,21 @@
+{
+  "inputFile": "infile.pdf",
+  "outputFile": "outfile.pdf",
+  "pages": [
+    {
+      "file": "."
+    },
+    {
+      "file": "additional.pdf",
+      "range": "1-z"
+    }
+  ],
+  "encrypt": {
+    "userPassword": "pw.user",
+    "ownerPassword": "pw.owner",
+    "256bit": {
+      "print": "low"
+    }
+  },
+  "objectStreams": "generate"
+}

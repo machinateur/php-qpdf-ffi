@@ -86,19 +86,19 @@ function qpdfjob_run_from_json(string $json): int
 }
 
 if (false) {
-/**
- * Interface typehints for `$qpdfffi` {@see \FFI} instance in {@see \qpdfjob_run_from_json()}.
- *
- * @internal unused; only used for typehints proper
- */
-interface qpdfffi
-{
     /**
-     * @see \qpdfjob_run_from_json()
-     * @see \qpdf_exit_code_e
+     * Interface typehints for `$qpdfffi` {@see \FFI} instance in {@see \qpdfjob_run_from_json()}.
+     *
+     * @internal unused; only used for typehints proper
      */
-    function qpdfjob_run_from_json(string $json): int;
-}
+    interface qpdfffi
+    {
+        /**
+         * @see \qpdfjob_run_from_json()
+         * @see \qpdf_exit_code_e
+         */
+        function qpdfjob_run_from_json(string $json): int;
+    }
 }
 
 /**
