@@ -44,11 +44,32 @@ class QpdfJobTest extends TestCase
     }
 
     /**
-     * @return \Generator<string|null>
+     * @phpstan-type _dataset array<string, array{'json': string}>
+     *
+     * @return array<_dataset>
      */
-    public static function provideJson(): \Generator
+    public static function provideJson(): array
     {
-        yield \file_get_contents(__DIR__ . '/res/example.json') ?: '';
+        static $dataset;
+
+        if (!isset($dataset)) {
+            /**
+             * @param string $filename
+             * @return _dataset
+             */
+            $dataset = static function (string $filename): array {
+                $filepath = \sprintf(__DIR__ . '/res/%s', $filename);
+
+                return [$filename => ['json' => \file_get_contents($filepath) ?: '']];
+            };
+        }
+
+        // Declare all the datasets.
+        // In future versions this can be done using spread operator, but in 7.4 the function is needed.
+        return \array_merge(
+            $dataset('example.json'),
+            // ... more files
+        );
     }
 
     /**
@@ -64,8 +85,12 @@ class QpdfJobTest extends TestCase
 
         // Decode data to pull some information for assertions below.
         $data = \json_decode($json, true);
+
+        $compareFile = $data['outputFile'];
+        $controlFile = \basename($compareFile) . '_control.php';
+
         // Compare the outfile to the control file.
-        $diff = self::getDiff(__DIR__ . '/res/outfile_control.pdf', $data['outputFile']);
+        $diff = self::getDiff($controlFile, $compareFile);
 
         // The diff has to stay in bounds of `int<0, 5>`.
         self::assertGreaterThanOrEqual(0, $diff);

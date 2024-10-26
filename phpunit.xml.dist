@@ -23,7 +23,7 @@
   ~ SOFTWARE.
   -->
 
-<phpunit bootstrap        = "tests/bootstrap.php"
+<phpunit bootstrap        = "tests/autoload.php"
          backupGlobals    = "false"
          colors           = "true"
          processIsolation = "false"
@@ -36,7 +36,7 @@
 >
     <testsuites>
         <testsuite name="Project Test Suite">
-            <file>QpdfJobTest.php</file>
+            <file>tests/QpdfJobTest.php</file>
         </testsuite>
     </testsuites>
 

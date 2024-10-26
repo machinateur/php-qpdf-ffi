@@ -9,6 +9,13 @@
   ],
   "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "machinateur",
+      "email": "hello@machinateur.dev",
+      "homepage": "https://machinateur.dev"
+    }
+  ],
   "autoload": {
     "files": [
       "lib_qpdf.php"
@@ -17,15 +24,11 @@
   "autoload-dev": {
     "psr-4": {
       "Machinateur\\Qpdf\\Tests\\": "tests/"
-    }
+    },
+    "exclude-from-files": [
+      "tests/bootstrap.php"
+    ]
   },
-  "authors": [
-    {
-      "name": "machinateur",
-      "email": "hello@machinateur.dev",
-      "homepage": "https://machinateur.dev"
-    }
-  ],
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.4",
@@ -38,6 +41,6 @@
     "machinateur/imagickompare": "@dev"
   },
   "scripts": {
-    "tests": "phpunit"
+    "tests": "./bin/phpunit"
   }
 }
