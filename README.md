@@ -76,6 +76,15 @@ switch ($result)
 }
 ```
 
+## Tests
+
+The test-suite is built based on resources from [`py-pdf/sample-files`](https://github.com/py-pdf/sample-files).
+ The `QpdfJobTest.php` is implemented in a way that makes adding addition qpdf JSON job files very ease.
+As of now, there is only one `example.json` file,
+ taken from the [qpdf docs](https://qpdf.readthedocs.io/en/latest/qpdf-job.html#qpdf-job).
+
+All example jobs should use the same output file, that way the cleanup before each test stays simple (`unlink()`).
+
 ## License
 
 It's MIT.
