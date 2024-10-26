@@ -1,7 +1,5 @@
 # php-qpdf-ffi
 
-> __WORK IN PROGRESS / PROOF OF CONCEPT__
-
 A really simple PHP integration for [qpdf](https://github.com/qpdf/qpdf) leveraging its JSON job file functionality
  with PHP-FFI to C.
 
@@ -50,6 +48,8 @@ The JSON format can be dynamically generated based on the requirements of your a
 ## Usage
 
 ```php
+<?php
+
 \define('LIB_QPDF_PATH', '/path/to/your/qpdf');
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -73,6 +73,21 @@ switch ($result)
         return;
 }
 ```
+
+## Job file format
+
+The format is documented extensively on qpdf's docs:
+
+> https://qpdf.readthedocs.io/en/latest/cli.html
+
+## Tests
+
+The test-suite is built based on resources from [`py-pdf/sample-files`](https://github.com/py-pdf/sample-files).
+ The `QpdfJobTest.php` is implemented in a way that makes adding addition qpdf JSON job files very ease.
+As of now, there is only one `example.json` file,
+ taken from the [qpdf docs](https://qpdf.readthedocs.io/en/latest/qpdf-job.html#qpdf-job).
+
+All example jobs should use the same output file, that way the cleanup before each test stays simple (`unlink()`).
 
 ## License
 

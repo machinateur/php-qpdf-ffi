@@ -9,3 +9,7 @@ thumbs.db
 
 vendor/
 composer.lock
+
+# Test
+
+.phpunit.result.cache

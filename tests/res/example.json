@@ -1,0 +1,17 @@
+{
+  "inputFile": "tests/res/infile.pdf",
+  "outputFile": "tests/res/outfile.pdf",
+  "pages": [
+    {
+      "file": "."
+    },
+    {
+      "file": "tests/res/sample-files@8c405ec/005-libreoffice-writer-password/libreoffice-writer-password.pdf",
+      "password": "openpassword"
+    },
+    {
+      "file": "tests/res/sample-files@8c405ec/001-trivial/minimal-document.pdf"
+    }
+  ],
+  "objectStreams": "generate"
+}

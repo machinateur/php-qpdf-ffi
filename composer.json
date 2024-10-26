@@ -9,11 +9,6 @@
   ],
   "type": "library",
   "license": "MIT",
-  "autoload": {
-    "files": [
-      "lib_qpdf.php"
-    ]
-  },
   "authors": [
     {
       "name": "machinateur",
@@ -21,10 +16,31 @@
       "homepage": "https://machinateur.dev"
     }
   ],
+  "autoload": {
+    "files": [
+      "lib_qpdf.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Machinateur\\Qpdf\\Tests\\": "tests/"
+    }
+  },
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.4",
     "ext-ffi": "*",
     "ext-json": "*"
+  },
+  "require-dev": {
+    "machinateur/imagickompare": "^1.0",
+    "phpunit/phpunit": "^11.4",
+    "symfony/process": "^7.1"
+  },
+  "scripts": {
+    "tests": "./bin/phpunit"
+  },
+  "config": {
+    "sort-packages": true
   }
 }
