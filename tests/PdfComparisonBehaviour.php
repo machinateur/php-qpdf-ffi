@@ -30,12 +30,21 @@ namespace Machinateur\Qpdf\Tests;
 trait PdfComparisonBehaviour
 {
     /**
+     * Compare the job result with a control file.
+     *  The control file name is resolved from the outfile's JSON content (`outputFile`).
+     *
      * @see \compare_with_imagick()
      *
      * @throws \ImagickException
      */
-    final public static function getDiff(string $controlFile, string $compareFile): float
+    final public static function getDiff(string $file, string $json): float
     {
+        // Decode data to pull some information for assertions below.
+        $data = \json_decode($json, true);
+
+        $compareFile = $data['outputFile'];
+        $controlFile = \sprintf('%s/%s_control.pdf', \dirname($compareFile), \basename($compareFile, '.pdf'));
+
         return \compare_with_imagick($controlFile, $compareFile, [], 5);
     }
 }

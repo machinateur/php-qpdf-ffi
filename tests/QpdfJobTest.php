@@ -38,7 +38,11 @@ class QpdfJobTest extends TestCase
     use ExtensionLoadedBehaviour;
     use PdfComparisonBehaviour;
 
-    public static function setUpBeforeClass(): void
+    /**
+     * All outfile files should be removed before the test runs.
+     *  To make things easy, use the same outfile for every test.
+     */
+    public function setUp(): void
     {
         @\unlink(__DIR__ . '/res/outfile.pdf');
     }
@@ -60,7 +64,7 @@ class QpdfJobTest extends TestCase
             $dataset = static function (string $filename): array {
                 $filepath = \sprintf(__DIR__ . '/res/%s', $filename);
 
-                return [$filename => ['json' => \file_get_contents($filepath) ?: '']];
+                return [$filename => [$filepath, 'json' => \file_get_contents($filepath) ?: '']];
             };
         }
 
@@ -75,25 +79,22 @@ class QpdfJobTest extends TestCase
     /**
      * @dataProvider provideJson
      */
-    public function testRunJobFromJson(string $json): void
+    public function testRunJobFromJson(string $file, string $json): void
     {
-        // The string must not be empty.
-        self::assertNotEmpty($json, 'File not found');
+        self::assertFileExists($file, \sprintf('File not found (%s)', $file));
 
-        // Successful invocation returns 0.
-        self::assertSame(\qpdf_exit_code_e::QPDF_EXIT_SUCCESS, \qpdfjob_run_from_json($json));
+        // The string must not be empty and valid json.
+        self::assertNotEmpty($json, sprintf('File content empty (%s)', $file));
+        self::assertJson($json, \sprintf('File content invalid (%s)', $file));
 
-        // Decode data to pull some information for assertions below.
-        $data = \json_decode($json, true);
-
-        $compareFile = $data['outputFile'];
-        $controlFile = \basename($compareFile) . '_control.php';
+        // Successful invocation returns 0. Please note that paths in the json have to be relative to `\getcwd()` or absolute.
+        self::assertSame(\qpdf_exit_code_e::QPDF_EXIT_SUCCESS, \qpdfjob_run_from_json($json), 'Unexpected exit code');
 
         // Compare the outfile to the control file.
-        $diff = self::getDiff($controlFile, $compareFile);
+        $diff = self::getDiff($file, $json);
 
         // The diff has to stay in bounds of `int<0, 5>`.
-        self::assertGreaterThanOrEqual(0, $diff);
-        self::assertLessThanOrEqual(5, $diff);
+        self::assertGreaterThanOrEqual(0, $diff, 'Diff value below threshold');
+        self::assertLessThanOrEqual(5, $diff, 'Diff value above threshold');
     }
 }
