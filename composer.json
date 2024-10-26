@@ -36,11 +36,14 @@
     "ext-json": "*"
   },
   "require-dev": {
+    "machinateur/imagickompare": "^1.0",
     "phpunit/phpunit": "^11.4",
-    "symfony/process": "^7.1",
-    "machinateur/imagickompare": "@dev"
+    "symfony/process": "^7.1"
   },
   "scripts": {
     "tests": "./bin/phpunit"
+  },
+  "config": {
+    "sort-packages": true
   }
 }
