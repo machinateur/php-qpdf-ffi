@@ -24,10 +24,7 @@
   "autoload-dev": {
     "psr-4": {
       "Machinateur\\Qpdf\\Tests\\": "tests/"
-    },
-    "exclude-from-files": [
-      "tests/bootstrap.php"
-    ]
+    }
   },
   "minimum-stability": "stable",
   "require": {
