@@ -1,7 +1,5 @@
 # php-qpdf-ffi
 
-> __WORK IN PROGRESS / PROOF OF CONCEPT__
-
 A really simple PHP integration for [qpdf](https://github.com/qpdf/qpdf) leveraging its JSON job file functionality
  with PHP-FFI to C.
 
@@ -75,6 +73,12 @@ switch ($result)
         return;
 }
 ```
+
+## Job file format
+
+The format is documented extensively on qpdf's docs:
+
+> https://qpdf.readthedocs.io/en/latest/cli.html
 
 ## Tests
 
