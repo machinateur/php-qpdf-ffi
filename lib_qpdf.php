@@ -25,11 +25,6 @@
 
 declare(strict_types=1);
 
-if (!\defined('LIB_QPDF_PATH')) {
-    // qpdf 11.9 is expected in the path
-    \define('LIB_QPDF_PATH', 'qpdf.so.11.9');
-}
-
 /**
  * This function runs QPDFJob from a job JSON file. See the "QPDF Job" section of the manual for
  *  details. The JSON string must be UTF8-encoded. It returns the error code that qpdf would
@@ -45,10 +40,19 @@ if (!\defined('LIB_QPDF_PATH')) {
  *
  * @return int<0, 3>                            The qpdf CLI exit code
  *
+ * @throws \CompileError                        when the `LIB_QPDF_PATH` is not defined
  * @throws \InvalidArgumentException            when the json input is invalid
  */
 function qpdfjob_run_from_json(string $json): int
 {
+    // On first call within thread this precondition has to be checked.
+    static $warmup = true;
+    if ($warmup && !\defined('LIB_QPDF_PATH')) {
+        // qpdf 11.9 is expected in the path
+        throw new \CompileError('Constant LIB_QPDF_PATH is not defined.');
+    }
+    $warmup = false;
+
     // Ensure json is encoded in valid UTF-8. This is an old trick to avoid a dependency on `ext-mbstring`.
     if (!\preg_match('!!u', $json)) {
         throw new \InvalidArgumentException('Malformed UTF-8 characters, possibly incorrectly encoded.', \JSON_ERROR_UTF8);
