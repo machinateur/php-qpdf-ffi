@@ -23,7 +23,7 @@ composer require machinateur/php-qpdf-ffi
 ```
 
 The path to the C library should be specified by means of the `LIB_QPDF_PATH` constant.
- If not defined, a default value of `qpdf.so.11.9` will be used.
+ If not defined, a `\CompileError` will be thrown upon calling a function.
 
 ### Where to get the `qpdf` binaries
 
@@ -50,6 +50,7 @@ The JSON format can be dynamically generated based on the requirements of your a
 ```php
 <?php
 
+// Define the required constant value, the path to the qpdf binary
 \define('LIB_QPDF_PATH', '/path/to/your/qpdf');
 
 require_once __DIR__ . '/vendor/autoload.php';
