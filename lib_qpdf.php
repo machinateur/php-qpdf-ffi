@@ -25,6 +25,11 @@
 
 declare(strict_types=1);
 
+// Stop right here, if the function already exists in the global scope.
+if (\function_exists('qpdfjob_run_from_json')) {
+    return;
+}
+
 /**
  * This function runs QPDFJob from a job JSON file. See the "QPDF Job" section of the manual for
  *  details. The JSON string must be UTF8-encoded. It returns the error code that qpdf would
